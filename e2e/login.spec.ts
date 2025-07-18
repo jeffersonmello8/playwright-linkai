@@ -1,57 +1,81 @@
 import { test, expect } from '@playwright/test'
 
 import { getLoginPage } from '../support/pages/LoginPage'
-
+import { getDashPage } from '../support/pages/DashPage'
+import { getToast } from '../support/pages/components/Toast'
+import { User, Users } from '../support/fixtures/User'
+import { userInfo } from 'os'
 
 test('deve logar com sucesso', async ({ page }) => {
 
     const loginPage = getLoginPage(page)
-
-    const user = {
-        username: 'jefferson',
-        password: 'pwd123'
-    }
+    const dashPage = getDashPage(page)
+    const toast = getToast(page)
 
     loginPage.open()
-    loginPage.submit(user.username, user.password)
+    loginPage.submit(Users.validUser)
 
-    const title = page.locator('h1')
-    await expect(title).toContainText('Olá, Jefferson Sousa!')
-
+    await expect(dashPage.welcome()).toContainText(`Olá, ${Users.validUser.name}!`)
+    await expect(toast.element()).toContainText('Login realizado com sucesso!')
+    await expect(toast.element()).toContainText('Bem-vindo de volta ao Linkaí.')
 })
 
 test('não deve logar com sucesso', async ({ page }) => {
 
     const loginPage = getLoginPage(page)
-
-    const user = {
-        username: 'jefferson',
-        password: '123456'
-    }
+    const toast = getToast(page)
 
     loginPage.open()
-    loginPage.submit(user.username, user.password)
+    loginPage.submit(Users.invalidPasswordUser)
 
-    const toast = page.locator('.toast')
-
-    await expect(toast).toContainText('Oops!')
-    await expect(toast).toContainText('Algo deu errado com seu login. Por favor, verifique suas credenciais')
+    await expect(toast.element()).toContainText('Oops!')
+    await expect(toast.element()).toContainText('Algo deu errado com seu login. Por favor, verifique suas credenciais')
 })
 
 test('não deve logar com usuário não cadastrado', async ({ page }) => {
 
     const loginPage = getLoginPage(page)
-
-    const user = {
-        username: 'romario',
-        password: 'pwd123'
-    }
+    const toast = getToast(page)
 
     loginPage.open()
-    loginPage.submit(user.username, user.password)
+    loginPage.submit(Users.unregisteredUser)
 
-    const toast = page.locator('.toast')
+    await expect(toast.element()).toContainText('Oops!')
+    await expect(toast.element()).toContainText('Algo deu errado com seu login. Por favor, verifique suas credenciais')
+})
 
-    await expect(toast).toContainText('Oops!')
-    await expect(toast).toContainText('Algo deu errado com seu login. Por favor, verifique suas credenciais')
+test('não deve logar quando não informo nenhum dos campos', async ({ page }) => {
+
+    const loginPage = getLoginPage(page)
+    const toast = getToast(page)
+
+    loginPage.open()
+    loginPage.submit(Users.emptyFieldsUser)
+
+    await expect(toast.element()).toContainText('Campos obrigatórios')
+    await expect(toast.element()).toContainText('Por favor, preencha todos os campos.')
+})
+
+test('não deve logar quando não informo o usuário', async ({ page }) => {
+
+    const loginPage = getLoginPage(page)
+    const toast = getToast(page)
+
+    loginPage.open()
+    loginPage.submit(Users.emptyUsernameUser)
+
+    await expect(toast.element()).toContainText('Campos obrigatórios')
+    await expect(toast.element()).toContainText('Por favor, preencha todos os campos.')
+})
+
+test('não deve logar quando não informo a senha', async ({ page }) => {
+
+    const loginPage = getLoginPage(page)
+    const toast = getToast(page)
+
+    loginPage.open()
+    loginPage.submit(Users.emptyPasswordUser)
+
+    await expect(toast.element()).toContainText('Campos obrigatórios')
+    await expect(toast.element()).toContainText('Por favor, preencha todos os campos.')
 })

@@ -5,7 +5,4 @@ test('has title', async ({ page }) => {
 
   // Expect a title "to contain" a substring.
   await expect(page).toHaveTitle(/Linkaí/);
-
-
-  await page.waitForTimeout(3000)
 });

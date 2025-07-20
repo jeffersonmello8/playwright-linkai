@@ -1,5 +1,5 @@
 <div align="center">
-  <img src=".github/images/playwright-logo.png" alt="Logo ou imagem do projeto" style="max-width: 350px; margin-bottom: 20px;" />
+  <img src=".github/images/playwright-logo.png" alt="Logo ou imagem do projeto" style="width: 350px; margin-bottom: 20px;" />
 </div>
 
 # Playwright LinkAI
@@ -85,4 +85,4 @@ Pull requests são bem-vindos! Sinta-se à vontade para abrir issues ou sugerir 
 
 ---
 
-> Projeto mantido por Jefferson Mello.
+> Projeto mantido por Jefferson Melo.

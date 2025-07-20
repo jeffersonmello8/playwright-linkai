@@ -6,7 +6,6 @@ import { getToast } from '../support/pages/components/Toast'
 import { Users } from '../support/fixtures/User'
 
 test('deve logar com sucesso', async ({ page }) => {
-
     const loginPage = getLoginPage(page)
     const dashPage = getDashPage(page)
     const toast = getToast(page)
@@ -20,7 +19,6 @@ test('deve logar com sucesso', async ({ page }) => {
 })
 
 test('não deve logar com sucesso', async ({ page }) => {
-
     const loginPage = getLoginPage(page)
     const toast = getToast(page)
 
@@ -32,7 +30,6 @@ test('não deve logar com sucesso', async ({ page }) => {
 })
 
 test('não deve logar com usuário não cadastrado', async ({ page }) => {
-
     const loginPage = getLoginPage(page)
     const toast = getToast(page)
 
@@ -44,7 +41,6 @@ test('não deve logar com usuário não cadastrado', async ({ page }) => {
 })
 
 test('não deve logar quando não informo nenhum dos campos', async ({ page }) => {
-
     const loginPage = getLoginPage(page)
     const toast = getToast(page)
 
@@ -56,7 +52,6 @@ test('não deve logar quando não informo nenhum dos campos', async ({ page }) =
 })
 
 test('não deve logar quando não informo o usuário', async ({ page }) => {
-
     const loginPage = getLoginPage(page)
     const toast = getToast(page)
 
@@ -68,7 +63,6 @@ test('não deve logar quando não informo o usuário', async ({ page }) => {
 })
 
 test('não deve logar quando não informo a senha', async ({ page }) => {
-
     const loginPage = getLoginPage(page)
     const toast = getToast(page)
 

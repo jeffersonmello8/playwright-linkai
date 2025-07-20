@@ -104,7 +104,6 @@ test('deve exibir erro ao tentar cadastrar com e-mail já existente', async ({ p
 })
 
 test('deve validar o formato inválido de email sem @', async ({ page }) => {
-
     const registerPage = getRegisterPage(page)
     const warning = getWarning(page)
     const newUser = createRandomUser()
@@ -120,7 +119,6 @@ test('deve validar o formato inválido de email sem @', async ({ page }) => {
 })
 
 test('deve validar o formato inválido de email sem domínio', async ({ page }) => {
-
     const registerPage = getRegisterPage(page)
     const warning = getWarning(page)
     const newUser = createRandomUser()
@@ -136,7 +134,6 @@ test('deve validar o formato inválido de email sem domínio', async ({ page }) 
 })
 
 test('deve exibir erro quando a confirmação de senha for diferente da senha', async ({ page }) => {
-
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
     const newUser = createRandomUser()

@@ -14,7 +14,7 @@ Este repositório contém uma suíte de testes automatizados end-to-end utilizan
 ├── e2e/                # Testes automatizados (specs)
 │   ├── home.spec.ts    # Testes da página inicial
 │   ├── login.spec.ts   # Testes de login
-│   └── register.spec.ts# Testes de cadastro
+│   └── register.spec.ts# Testes de cadastro de usuário
 ├── support/
 │   ├── fixtures/       # Dados e utilitários de teste
 │   └── pages/          # Page Objects (modelos das páginas)
@@ -25,9 +25,7 @@ Este repositório contém uma suíte de testes automatizados end-to-end utilizan
 │       └── components/ # Componentes reutilizáveis
 ├── playwright.config.ts# Configuração do Playwright
 ├── package.json        # Dependências e scripts
-├── start_all.bat       # Script para rodar todos os testes no Windows
-├── playwright-report/  # Relatórios gerados automaticamente
-└── test-results/       # Traces e evidências de execução
+├── start_all.bat       # Script para subir o ambiente de desenvolvimento
 ```
 
 ## Como Executar os Testes
@@ -43,9 +41,6 @@ Este repositório contém uma suíte de testes automatizados end-to-end utilizan
    ```
 3. **Visualize o relatório:**
    Após a execução, abra o arquivo `playwright-report/index.html` para visualizar o relatório interativo dos testes.
-
-4. **Acesse traces detalhados:**
-   Em caso de falha, consulte os arquivos em `test-results/` para análise detalhada do fluxo do teste.
 
 ## Sobre o arquivo `start_all.bat`
 
@@ -64,10 +59,6 @@ O arquivo `start_all.bat` é um script em lote para Windows que prepara o ambien
 O script irá:
 - Inicializar a API e a interface web em ambiente de desenvolvimento;
 - Aguardar que os serviços estejam prontos;
-- Em seguida, executar a suíte de testes Playwright;
-- Gerar os relatórios automaticamente ao final da execução.
-
-Assim, você garante que os testes rodem sempre com a aplicação pronta e atualizada no ambiente local.
 
 ## Boas Práticas Utilizadas
 - **Page Object Model:** Separação da lógica de interação com as páginas em arquivos dedicados, facilitando manutenção e reuso.

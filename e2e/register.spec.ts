@@ -3,13 +3,13 @@ import { getRegisterPage } from '../support/pages/RegisterPage'
 import { getToast } from '../support/pages/components/Toast'
 import { getDashPage } from '../support/pages/DashPage'
 import { getWarning } from '../support/pages/components/Warning'
-import { newRandomUser } from '../support/fixtures/User'
+import { createRandomUser } from '../support/fixtures/User'
 
 test('deve realizar o cadastro com sucesso', async ({ page }) => {
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
     const dashPage = getDashPage(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
 
     await registerPage.open()
     await registerPage.fillNewRandomUser(newUser)
@@ -34,7 +34,7 @@ test('deve exibir erro ao tentar cadastrar com campos obrigatórios em branco', 
 test('deve exibir erro ao tentar cadastrar com nome em branco', async ({ page }) => {
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
     newUser.firstName = ""
 
     await registerPage.open()
@@ -48,7 +48,7 @@ test('deve exibir erro ao tentar cadastrar com nome em branco', async ({ page })
 test('deve exibir erro ao tentar cadastrar com username em branco', async ({ page }) => {
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
     newUser.username = ""
 
     await registerPage.open()
@@ -62,7 +62,7 @@ test('deve exibir erro ao tentar cadastrar com username em branco', async ({ pag
 test('deve exibir erro ao tentar cadastrar com e-mail em branco', async ({ page }) => {
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
     newUser.email = ""
 
     await registerPage.open()
@@ -76,7 +76,7 @@ test('deve exibir erro ao tentar cadastrar com e-mail em branco', async ({ page 
 test('deve exibir erro ao tentar cadastrar com senha em branco', async ({ page }) => {
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
     newUser.password = ""
 
     await registerPage.open()
@@ -90,7 +90,7 @@ test('deve exibir erro ao tentar cadastrar com senha em branco', async ({ page }
 test('deve exibir erro ao tentar cadastrar com e-mail já existente', async ({ page }) => {
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
 
     await registerPage.open()
     await registerPage.fillNewRandomUser(newUser)
@@ -103,14 +103,13 @@ test('deve exibir erro ao tentar cadastrar com e-mail já existente', async ({ p
     await expect(toastPage.element()).toContainText('User with that email or username already exists')
 })
 
-
 test('deve validar o formato inválido de email sem @', async ({ page }) => {
 
     const registerPage = getRegisterPage(page)
     const warning = getWarning(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
 
-    const invalidEmail = newUser.email.replace('@', '')
+    const invalidEmail = newUser.email!.replace('@', '')
     newUser.email = invalidEmail
 
     await registerPage.open()
@@ -124,9 +123,9 @@ test('deve validar o formato inválido de email sem domínio', async ({ page }) 
 
     const registerPage = getRegisterPage(page)
     const warning = getWarning(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
 
-    const invalidEmail = newUser.email.replace('hotmail.com', '')
+    const invalidEmail = newUser.email!.replace('hotmail.com', '')
     newUser.email = invalidEmail
 
     await registerPage.open()
@@ -140,7 +139,7 @@ test('deve exibir erro quando a confirmação de senha for diferente da senha', 
 
     const registerPage = getRegisterPage(page)
     const toastPage = getToast(page)
-    const newUser = newRandomUser
+    const newUser = createRandomUser()
 
     await registerPage.open()
     await registerPage.fillNewRandomUser(newUser)

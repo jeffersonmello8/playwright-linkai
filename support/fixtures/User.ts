@@ -4,7 +4,7 @@ export interface User {
     name?: string,
     firstName?: string,
     username: string,
-    email: string,
+    email?: string,
     password: string,
 }
 
@@ -36,17 +36,21 @@ export const Users = {
     }
 }
 
-function createRandomUser(): User {
-    const fullName = `${fakerPT_BR.person.firstName()} ${fakerPT_BR.person.lastName()}`
-    const userName = fakerPT_BR.internet.username({ firstName: `${fullName.trim().split(/\s+/)[0]}`, lastName: `${fullName.trim().split(/\s+/)[1]}` }).replace('.', '_')
-    const email = `${fullName.trim().split(/\s+/)[0]}.${fullName.trim().split(/\s+/)[1]}@hotmail.com`
+export function createRandomUser(): User {
+  const firstName = fakerPT_BR.person.firstName().trim()
+  const lastName = fakerPT_BR.person.lastName().trim()
 
-    return {
-        firstName: fullName.trim().split(/\s+/)[0],
-        username: userName.toLowerCase(),
-        email: email.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
-        password: fakerPT_BR.internet.password(),
-    }
+  const userName = fakerPT_BR.internet.username({ firstName, lastName }).replace('.', '_')
+
+  const email = `${lastName}${fakerPT_BR.internet.httpStatusCode()}@hotmail.com`
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+
+  return {
+    firstName,
+    username: userName.toLowerCase(),
+    email,
+    password: fakerPT_BR.internet.password(),
+  }
 }
-
-export const newRandomUser: User = createRandomUser()

@@ -1,8 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
+import { getHomePage } from '../support/pages/HomePage'
 
-test('has title', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+test('deve exibir o título na home', async ({ page }) => {
+  const homePage = getHomePage(page)
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Linkaí/);
-});
+  await homePage.open()
+
+  expect(await homePage.getTitle()).toBe('Linkaí by Papito')
+})

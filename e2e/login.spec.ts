@@ -3,8 +3,7 @@ import { test, expect } from '@playwright/test'
 import { getLoginPage } from '../support/pages/LoginPage'
 import { getDashPage } from '../support/pages/DashPage'
 import { getToast } from '../support/pages/components/Toast'
-import { User, Users } from '../support/fixtures/User'
-import { userInfo } from 'os'
+import { Users } from '../support/fixtures/User'
 
 test('deve logar com sucesso', async ({ page }) => {
 
